@@ -42,16 +42,36 @@
             transition: opacity 0.5s ease;
         }
 
+        /* গোলাকার এবং পালস অ্যানিমেটেড লোগো */
         .logo-container {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
             background-image: url('Cop LOGO.png'); 
-            background-size: contain;
+            background-size: cover; 
             background-repeat: no-repeat;
             background-position: center;
-            /* লোগোটি যাতে গাঢ় ব্যাকগ্রাউন্ডে ভালো করে ফুটে ওঠে তার জন্য হালকা শ্যাডো (ঐচ্ছিক) */
-            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
+            background-color: #ffffff; /* বৃত্তের ভেতরে সাদা ব্যাকগ্রাউন্ড */
+            border-radius: 50%; /* লোগোটিকে পুরোপুরি গোলাকার করার জন্য */
+            border: 4px solid var(--gold-accent); /* সোনালী বর্ডার */
+            animation: pulseLogo 2s infinite ease-in-out; /* পালস অ্যানিমেশন */
+        }
+
+        /* লোগোর পালস অ্যানিমেশন (সোনালী আভা ছড়ানো) */
+        @keyframes pulseLogo {
+            0% { 
+                transform: scale(1); 
+                /* 212, 175, 55 হলো #d4af37 (সোনালী) রঙের RGB কোড */
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); 
+            }
+            50% { 
+                transform: scale(1.08); 
+                box-shadow: 0 0 20px 15px rgba(212, 175, 55, 0); 
+            }
+            100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); 
+            }
         }
 
         /* CSS স্পিনার */
@@ -83,7 +103,7 @@
         }
 
         .loading-text {
-            margin-top: 20px;
+            margin-top: 25px;
             font-size: 18px;
             color: var(--text-light); /* লেখা সাদা করা হয়েছে */
             text-align: center;
