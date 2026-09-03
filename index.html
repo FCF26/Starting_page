@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Friends' Co-operative Portal</title>
+    <style>
+        /* CSS কালার স্কিম এবং স্টাইল */
+        :root {
+            --primary-blue: #004d99; /* লোগোর গাঢ় নীল */
+            --gold: #d4af37;        /* লোগোর সোনালী */
+            --off-white: #f5f5f5;   /* ব্যাকগ্রাউন্ড */
+            --text-dark: #333;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--off-white);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* লোডার স্ক্রিন */
+        #loader-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--off-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        .logo-container {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            /* এখানে আপনার নতুন ইমেজের নামটি দেওয়া হয়েছে */
+            background-image: url('Cop LOGO.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* CSS স্পিনার (টাকার চিহ্ন ভিত্তিক) */
+        .rupee-spinner {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 5px solid rgba(0, 77, 153, 0.2); /* হালকা নীল */
+            border-top: 5px solid var(--gold);      /* সোনালী অ্যাকসেন্ট */
+            position: relative;
+            animation: spin 1s linear infinite;
+        }
+
+        /* টাকার চিহ্ন (₹) স্পিনারের মাঝখানে */
+        .rupee-spinner::after {
+            content: '₹';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: var(--primary-blue);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        /* Google Apps Script Iframe */
+        #portal-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none; /* প্রথমে লুকানো থাকবে */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- লোডার স্ক্রিন -->
+    <div id="loader-screen">
+        <div class="logo-container"></div>
+        <div class="rupee-spinner"></div>
+        <div class="loading-text">
+            অনুগ্রহ করে অপেক্ষা করুন... <br>
+            Friends' Co-operative Portal লোড হচ্ছে...
+        </div>
+    </div>
+
+    <!-- আইফ্রেম যা Apps Script লোড করবে -->
+    <iframe id="portal-iframe" 
+            src="https://script.google.com/macros/s/AKfycbxf__4kkbro0RW-K1ZmFc1gjgS40eami5gIX9KXlQlES1_84Ox1l5kEUZM_q9-p9BKk6A/exec" 
+            onload="portalLoaded()">
+    </iframe>
+
+    <script>
+        function portalLoaded() {
+            var loaderScreen = document.getElementById('loader-screen');
+            var portalIframe = document.getElementById('portal-iframe');
+
+            // লোডার স্ক্রিন ফেইড আউট করুন
+            loaderScreen.style.opacity = '0';
+            
+            // ছোট একটি টাইমআউট দিয়ে আইফ্রেম দেখান যাতে ট্রানজিশন মসৃণ হয়
+            setTimeout(function() {
+                loaderScreen.style.display = 'none';
+                portalIframe.style.display = 'block';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
