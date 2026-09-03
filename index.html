@@ -7,10 +7,10 @@
     <style>
         /* CSS কালার স্কিম এবং স্টাইল */
         :root {
-            --primary-blue: #004d99; /* লোগোর গাঢ় নীল */
-            --gold: #d4af37;        /* লোগোর সোনালী */
-            --off-white: #f5f5f5;   /* ব্যাকগ্রাউন্ড */
-            --text-dark: #333;
+            --bg-color: #1B5B6B; /* আপনার দেওয়া গাঢ় ব্যাকগ্রাউন্ড কালার */
+            --gold-accent: #d4af37; /* লোগোর সাথে ম্যাচ করা সোনালী রঙ */
+            --text-light: #ffffff; /* গাঢ় ব্যাকগ্রাউন্ডে পড়ার সুবিধার জন্য সাদা লেখা */
+            --spinner-base: rgba(255, 255, 255, 0.2); /* স্পিনারের হালকা বর্ডার */
         }
 
         body, html {
@@ -19,7 +19,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: var(--off-white);
+            background-color: var(--bg-color);
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: var(--off-white);
+            background-color: var(--bg-color);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -46,20 +46,21 @@
             width: 150px;
             height: 150px;
             margin-bottom: 20px;
-            /* এখানে আপনার নতুন ইমেজের নামটি দেওয়া হয়েছে */
             background-image: url('Cop LOGO.png'); 
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            /* লোগোটি যাতে গাঢ় ব্যাকগ্রাউন্ডে ভালো করে ফুটে ওঠে তার জন্য হালকা শ্যাডো (ঐচ্ছিক) */
+            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
         }
 
-        /* CSS স্পিনার (টাকার চিহ্ন ভিত্তিক) */
+        /* CSS স্পিনার */
         .rupee-spinner {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            border: 5px solid rgba(0, 77, 153, 0.2); /* হালকা নীল */
-            border-top: 5px solid var(--gold);      /* সোনালী অ্যাকসেন্ট */
+            border: 5px solid var(--spinner-base); 
+            border-top: 5px solid var(--gold-accent); /* সোনালী রঙের ঘূর্ণায়মান অংশ */
             position: relative;
             animation: spin 1s linear infinite;
         }
@@ -72,7 +73,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 24px;
-            color: var(--primary-blue);
+            color: var(--gold-accent); /* টাকার চিহ্নটিও সোনালী করা হলো */
             font-weight: bold;
         }
 
@@ -84,9 +85,11 @@
         .loading-text {
             margin-top: 20px;
             font-size: 18px;
-            color: var(--primary-blue);
+            color: var(--text-light); /* লেখা সাদা করা হয়েছে */
             text-align: center;
             padding: 0 20px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         /* Google Apps Script Iframe */
@@ -94,7 +97,7 @@
             width: 100%;
             height: 100%;
             border: none;
-            display: none; /* প্রথমে লুকানো থাকবে */
+            display: none; 
         }
     </style>
 </head>
@@ -124,7 +127,6 @@
             // লোডার স্ক্রিন ফেইড আউট করুন
             loaderScreen.style.opacity = '0';
             
-            // ছোট একটি টাইমআউট দিয়ে আইফ্রেম দেখান যাতে ট্রানজিশন মসৃণ হয়
             setTimeout(function() {
                 loaderScreen.style.display = 'none';
                 portalIframe.style.display = 'block';
