@@ -7,10 +7,10 @@
     <style>
         /* CSS কালার স্কিম এবং স্টাইল */
         :root {
-            --bg-color: #1B5B6B; /* আপনার দেওয়া গাঢ় ব্যাকগ্রাউন্ড কালার */
-            --gold-accent: #d4af37; /* লোগোর সাথে ম্যাচ করা সোনালী রঙ */
-            --text-light: #ffffff; /* গাঢ় ব্যাকগ্রাউন্ডে পড়ার সুবিধার জন্য সাদা লেখা */
-            --spinner-base: rgba(255, 255, 255, 0.2); /* স্পিনারের হালকা বর্ডার */
+            --bg-color: #1B5B6B; 
+            --gold-accent: #d4af37; 
+            --text-light: #ffffff; 
+            --spinner-base: rgba(255, 255, 255, 0.2); 
         }
 
         body, html {
@@ -47,21 +47,21 @@
             width: 140px;
             height: 140px;
             margin-bottom: 25px;
-            background-image: url('Cop LOGO.png'); 
+            /* ফাইলের নামের স্পেসের জন্য %20 ব্যবহার করা হয়েছে */
+            background-image: url('cop%20LOGO.png'); 
             background-size: cover; 
             background-repeat: no-repeat;
             background-position: center;
-            background-color: #ffffff; /* বৃত্তের ভেতরে সাদা ব্যাকগ্রাউন্ড */
-            border-radius: 50%; /* লোগোটিকে পুরোপুরি গোলাকার করার জন্য */
-            border: 4px solid var(--gold-accent); /* সোনালী বর্ডার */
-            animation: pulseLogo 2s infinite ease-in-out; /* পালস অ্যানিমেশন */
+            background-color: #ffffff; 
+            border-radius: 50%; 
+            border: 4px solid var(--gold-accent); 
+            animation: pulseLogo 2s infinite ease-in-out; 
         }
 
         /* লোগোর পালস অ্যানিমেশন (সোনালী আভা ছড়ানো) */
         @keyframes pulseLogo {
             0% { 
                 transform: scale(1); 
-                /* 212, 175, 55 হলো #d4af37 (সোনালী) রঙের RGB কোড */
                 box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); 
             }
             50% { 
@@ -80,7 +80,7 @@
             height: 60px;
             border-radius: 50%;
             border: 5px solid var(--spinner-base); 
-            border-top: 5px solid var(--gold-accent); /* সোনালী রঙের ঘূর্ণায়মান অংশ */
+            border-top: 5px solid var(--gold-accent); 
             position: relative;
             animation: spin 1s linear infinite;
         }
@@ -93,7 +93,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 24px;
-            color: var(--gold-accent); /* টাকার চিহ্নটিও সোনালী করা হলো */
+            color: var(--gold-accent); 
             font-weight: bold;
         }
 
@@ -105,7 +105,7 @@
         .loading-text {
             margin-top: 25px;
             font-size: 18px;
-            color: var(--text-light); /* লেখা সাদা করা হয়েছে */
+            color: var(--text-light); 
             text-align: center;
             padding: 0 20px;
             line-height: 1.5;
@@ -123,17 +123,15 @@
 </head>
 <body>
 
-    <!-- লোডার স্ক্রিন -->
     <div id="loader-screen">
         <div class="logo-container"></div>
         <div class="rupee-spinner"></div>
         <div class="loading-text">
             অনুগ্রহ করে অপেক্ষা করুন... <br>
-            Friends' Co-operative Portal লোড হচ্ছে...
+            Friends' Co-operative Fund (FCF) Portal লোড হচ্ছে...
         </div>
     </div>
 
-    <!-- আইফ্রেম যা Apps Script লোড করবে -->
     <iframe id="portal-iframe" 
             src="https://script.google.com/macros/s/AKfycbxf__4kkbro0RW-K1ZmFc1gjgS40eami5gIX9KXlQlES1_84Ox1l5kEUZM_q9-p9BKk6A/exec" 
             onload="portalLoaded()">
@@ -144,7 +142,6 @@
             var loaderScreen = document.getElementById('loader-screen');
             var portalIframe = document.getElementById('portal-iframe');
 
-            // লোডার স্ক্রিন ফেইড আউট করুন
             loaderScreen.style.opacity = '0';
             
             setTimeout(function() {
