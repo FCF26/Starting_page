@@ -56,6 +56,14 @@
             border-radius: 50%; 
             border: 4px solid var(--gold-accent); 
             animation: pulseLogo 2s infinite ease-in-out; 
+            
+            /* Square box shadow বাগ ফিক্স করার কোড (Hardware Acceleration) */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
 
         /* লোগোর পালস অ্যানিমেশন (সোনালী আভা ছড়ানো) */
@@ -123,6 +131,7 @@
 </head>
 <body>
 
+    <!-- লোডার স্ক্রিন -->
     <div id="loader-screen">
         <div class="logo-container"></div>
         <div class="rupee-spinner"></div>
@@ -132,6 +141,7 @@
         </div>
     </div>
 
+    <!-- আইফ্রেম যা Apps Script লোড করবে -->
     <iframe id="portal-iframe" 
             src="https://script.google.com/macros/s/AKfycbxf__4kkbro0RW-K1ZmFc1gjgS40eami5gIX9KXlQlES1_84Ox1l5kEUZM_q9-p9BKk6A/exec" 
             onload="portalLoaded()">
@@ -142,6 +152,7 @@
             var loaderScreen = document.getElementById('loader-screen');
             var portalIframe = document.getElementById('portal-iframe');
 
+            // লোডার স্ক্রিন ফেইড আউট করুন
             loaderScreen.style.opacity = '0';
             
             setTimeout(function() {
